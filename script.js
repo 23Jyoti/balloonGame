@@ -7,9 +7,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const balloonImages = [
         "./images/greenBalloon.png",
-        "./images/purpleBalloon.png",
+        "./images/purpleballoon.png",
         "./images/orangeBalloon.png",
-        "./images/yellowBalloon.png"
+        "./images/yellowBalloon.png",
+        "./images/redBalloon.png"
     ];
 
     let clickCount = 0;
