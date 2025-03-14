@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const balloonImages = [
         "./images/greenBalloon.png",
-        "./images/purpleBalloon.png", // Fixed case
+        "./images/purpleBalloon.png", 
         "./images/orangeBalloon.png",
         "./images/yellowBalloon.png",
         "./images/redBalloon.png"
