@@ -4,10 +4,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const balloonContainer = document.querySelector(".balloon-container");
     const fillerMouth = document.querySelector(".fillerMouth");
 
+    if (!handle || !box || !balloonContainer || !fillerMouth) {
+        console.error("One or more required elements are missing.");
+        return;
+    }
 
     const balloonImages = [
         "./images/greenBalloon.png",
-        "./images/purpleballoon.png",
+        "./images/purpleBalloon.png", // Fixed case
         "./images/orangeBalloon.png",
         "./images/yellowBalloon.png",
         "./images/redBalloon.png"
@@ -21,10 +25,9 @@ document.addEventListener("DOMContentLoaded", () => {
         balloon.src = balloonImages[Math.floor(Math.random() * balloonImages.length)];
         balloon.classList.add("balloon");
 
-        
         const mouthRect = fillerMouth.getBoundingClientRect();
         balloon.style.position = "absolute";
-        balloon.style.left = `${mouthRect.left + 40}px`; 
+        balloon.style.left = `${fillerMouth.offsetLeft + 40}px`; 
         balloon.style.bottom = "220px";
 
         balloonContainer.appendChild(balloon);
@@ -50,8 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         clickCount++;
 
-
-        if (clickCount % 4 === 1) {
+        if (clickCount % 4 === 0) {
             createBalloon(); 
         }
 
@@ -67,8 +69,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 currentBalloon.classList.add("floating-balloon");
 
                 setTimeout(() => {
-                    currentBalloon.remove();
-                    activeBalloons = activeBalloons.filter(b => b !== currentBalloon);
+                    if (currentBalloon && currentBalloon.parentNode) {
+                        currentBalloon.remove();
+                        activeBalloons = activeBalloons.filter(b => b !== currentBalloon);
+                    }
                 }, 4000); 
             }
         }
