@@ -4,10 +4,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const balloonContainer = document.querySelector(".balloon-container");
     const fillerMouth = document.querySelector(".fillerMouth");
 
-
     const balloonImages = [
         "./images/greenBalloon.png",
-        "./images/purpleBalloon.png",
+        "./images/purpleballoon.png",
         "./images/orangeBalloon.png",
         "./images/yellowBalloon.png",
         "./images/redBalloon.png"
@@ -21,14 +20,16 @@ document.addEventListener("DOMContentLoaded", () => {
         balloon.src = balloonImages[Math.floor(Math.random() * balloonImages.length)];
         balloon.classList.add("balloon");
 
-        
-        const mouthRect = fillerMouth.getBoundingClientRect();
+        // Ensure the balloon container is the reference for positioning
+        const mouthX = fillerMouth.offsetLeft;
+        const mouthY = fillerMouth.offsetTop;
+
         balloon.style.position = "absolute";
-        balloon.style.left = `${mouthRect.left + 40}px`; 
-        balloon.style.bottom = "220px";
+        balloon.style.left = `${mouthX + fillerMouth.offsetWidth / 2 - 15}px`; // Centering
+        balloon.style.bottom = `${balloonContainer.offsetHeight - mouthY}px`;
 
         balloonContainer.appendChild(balloon);
-        activeBalloons.push(balloon); 
+        activeBalloons.push(balloon);
 
         balloon.addEventListener("click", () => {
             balloon.classList.add("pop-effect");
@@ -50,7 +51,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         clickCount++;
 
-
         if (clickCount % 4 === 1) {
             createBalloon(); 
         }
@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 setTimeout(() => {
                     currentBalloon.remove();
                     activeBalloons = activeBalloons.filter(b => b !== currentBalloon);
-                }, 4000); 
+                }, 4000);
             }
         }
     });
